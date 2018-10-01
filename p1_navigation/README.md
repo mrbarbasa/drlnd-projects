@@ -23,8 +23,20 @@ The task is episodic, and in order to solve the environment, the agent must get 
 ### Getting Started
 
 1. Download and install Anaconda or Miniconda: https://conda.io/docs/user-guide/install/download.html.
-1. In the terminal, run `conda create --name navigation python=3.6.6`.
-1. Run `source activate navigation`.
+1. In the terminal, create and activate a new environment with Python 3.6.
+	- __Linux__ or __Mac__: 
+	```bash
+	conda create --name navigation python=3.6
+	source activate navigation
+	```
+	- __Windows__: 
+	```bash
+	conda create --name navigation python=3.6 
+	activate navigation
+	```
+1. Install Unity ML-Agents by following the instructions [here](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Installation.md).
+    - After following the instructions, check to make sure that `from unityagents import UnityEnvironment` in the Python REPL works without error.
+    - If it throws an error, you will need to run `pip install unityagents` in the terminal.
 1. Run `pip install -r requirements.txt`.
 1. Run `python -m ipykernel install --user --name navigation --display-name "navigation"`.
 
