@@ -26,6 +26,8 @@ The implementation is a simple Deep Q-Network with three fully connected layers:
 
 The plot below shows that, after 291 episodes, the agent is able to receive an average reward of 13 over the last 100 consecutive episodes.
 
+![final_model_rewards_plot](./final_model_rewards_plot.png)
+
 From the Final Run section of `Navigation.ipynb`, we have calculated that the average number of episodes required to solve the environment is 296, with a median of 289. This is from 10 trial runs of the manually-found optimal hyperparameters displayed in the table above.
 
 ## Ideas for Future Work
