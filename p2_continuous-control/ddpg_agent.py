@@ -26,7 +26,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 class Agent():
     """Interacts with and learns from the environment."""
     
-    def __init__(self, state_size, action_size, random_seed):
+    def __init__(self, num_agents, state_size, action_size, random_seed):
         """Initialize an Agent object.
         
         Params
@@ -35,6 +35,7 @@ class Agent():
             action_size (int): dimension of each action
             random_seed (int): random seed
         """
+        self.num_agents = num_agents
         self.state_size = state_size
         self.action_size = action_size
         self.seed = random.seed(random_seed)
@@ -55,26 +56,31 @@ class Agent():
         # Replay memory
         self.memory = ReplayBuffer(action_size, BUFFER_SIZE, BATCH_SIZE, random_seed)
     
-    def step(self, state, action, reward, next_state, done):
+    def step(self, states, actions, rewards, next_states, dones):
         """Save experience in replay memory, and use random sample from buffer to learn."""
-        # Save experience / reward
-        self.memory.add(state, action, reward, next_state, done)
+        # Save experience / reward for each agent to a replay buffer, shared by all agents
+        for i in range(self.num_agents):
+            self.memory.add(states[i], actions[i], rewards[i], next_states[i], dones[i])
 
         # Learn, if enough samples are available in memory
         if len(self.memory) > BATCH_SIZE:
             experiences = self.memory.sample()
             self.learn(experiences, GAMMA)
 
-    def act(self, state, add_noise=True):
-        """Returns actions for given state as per current policy."""
-        state = torch.from_numpy(state).float().to(device)
+    def act(self, states, add_noise=True):
+        """Returns actions for given states as per current policy."""
+        states = torch.from_numpy(states).float().to(device)
+        actions = []
         self.actor_local.eval()
         with torch.no_grad():
-            action = self.actor_local(state).cpu().data.numpy()
+            for state in states:
+                # Take an action for each agent (for each state)
+                action = self.actor_local(state).cpu().data.numpy()
+                actions.append(action)
         self.actor_local.train()
         if add_noise:
-            action += self.noise.sample()
-        return np.clip(action, -1, 1)
+            actions += self.noise.sample()
+        return np.clip(actions, -1, 1)
 
     def reset(self):
         self.noise.reset()
