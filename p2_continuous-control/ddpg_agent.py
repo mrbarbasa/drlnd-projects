@@ -56,7 +56,7 @@ class Agent():
         # Replay memory
         self.memory = ReplayBuffer(action_size, BUFFER_SIZE, BATCH_SIZE, random_seed)
     
-    def step(self, states, actions, rewards, next_states, dones, timestep):
+    def step(self, states, actions, rewards, next_states, dones):
         """Save experience in replay memory, and use random sample from buffer to learn."""
         # Save experience / reward for each agent to a replay buffer, shared by all agents
         for i in range(self.num_agents):
@@ -64,11 +64,8 @@ class Agent():
 
         # Learn, if enough samples are available in memory
         if len(self.memory) > BATCH_SIZE:
-            # Only learn every 20 timesteps, in which the networks are updated 10 times
-            if timestep % 20 == 0:
-                for i in range(10):
-                    experiences = self.memory.sample()
-                    self.learn(experiences, GAMMA)
+            experiences = self.memory.sample()
+            self.learn(experiences, GAMMA)
 
     def act(self, states, add_noise=True):
         """Returns actions for given states as per current policy."""
@@ -114,8 +111,6 @@ class Agent():
         # Minimize the loss
         self.critic_optimizer.zero_grad()
         critic_loss.backward()
-        # Apply gradient clipping when training the critic network
-        torch.nn.utils.clip_grad_norm_(self.critic_local.parameters(), 1)
         self.critic_optimizer.step()
 
         # ---------------------------- update actor ---------------------------- #
