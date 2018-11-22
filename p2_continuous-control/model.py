@@ -1,5 +1,6 @@
 # Note: This is code from the Udacity DDPG Pendulum solution
-# (https://github.com/udacity/deep-reinforcement-learning/tree/master/ddpg-pendulum).
+# (https://github.com/udacity/deep-reinforcement-learning/tree/master/ddpg-pendulum)
+# but with 500 and 375 hidden units for both actor and critic.
 
 import numpy as np
 
