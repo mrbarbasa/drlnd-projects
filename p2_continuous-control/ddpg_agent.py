@@ -64,8 +64,10 @@ class Agent():
 
         # Learn, if enough samples are available in memory
         if len(self.memory) > BATCH_SIZE:
-            experiences = self.memory.sample()
-            self.learn(experiences, GAMMA)
+            # Update the networks 20 times per timestep
+            for i in range(20):
+                experiences = self.memory.sample()
+                self.learn(experiences, GAMMA)
 
     def act(self, states, add_noise=True):
         """Returns actions for given states as per current policy."""
@@ -111,7 +113,7 @@ class Agent():
         # Minimize the loss
         self.critic_optimizer.zero_grad()
         critic_loss.backward()
-        # torch.nn.utils.clip_grad_norm(self.critic_local.parameters(), 1) # TODO
+        torch.nn.utils.clip_grad_norm_(self.critic_local.parameters(), 1)
         self.critic_optimizer.step()
 
         # ---------------------------- update actor ---------------------------- #
