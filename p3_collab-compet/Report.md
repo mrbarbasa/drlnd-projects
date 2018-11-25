@@ -21,7 +21,24 @@ In this project, we used the Deep Deterministic Policy Gradients ([DDPG](https:/
 
 ## Results
 
-
+| Trial | # of Episodes to Solve | Description | Comments |
+| ------------- | ------------- | ------------- | ------------- |
+| [Initial Run](https://github.com/mrbarbasa/drlnd-projects/commit/7e483217ed5e576a0686ac12ad2cf6fa74a235c8) | 996 | Default params with tau 1e-2, batch size 128, and critic LR 1e-3 | Baseline [Reacher](https://github.com/mrbarbasa/drlnd-projects/tree/master/p2_continuous-control) code with a change to tau |
+| [Trial 1](https://github.com/mrbarbasa/drlnd-projects/commit/46d4f38142ae5c3f8ac793daf9a81a95d832ea5a) | Interrupted after 3500 | Tau 1e-3 | Not solved |
+| [Trial 2](https://github.com/mrbarbasa/drlnd-projects/commit/190011707bd322cdac4bc56accb498efdd70f276) | 820 | Tau 1e-1 | Better than Initial Run |
+| [Trial 3](https://github.com/mrbarbasa/drlnd-projects/commit/5cfd98454227727be672e47d284055be51b5538a) | Interrupted after 1900 | Tau 5e-1 | Close to solving but not better than Initial Run and Trial 2 |
+| [Trial 4](https://github.com/mrbarbasa/drlnd-projects/commit/36b0479b96ba880f260d6066f548d7440557ffad) | 534 | Tau 3e-1 | Best results thus far |
+| [Trial 5](https://github.com/mrbarbasa/drlnd-projects/commit/5877b090bf7e763006d3d68cd5a1ceb6999380c9) | Interrupted after 1700 | Tau 4e-1 | Not that close to solving |
+| [Trial 6](https://github.com/mrbarbasa/drlnd-projects/commit/923bd7cc58778beea1255b074dd94e8a9ec550d5) | 601 | Tau 2e-1 | Not better than Trial 4 |
+| [Trial 7](https://github.com/mrbarbasa/drlnd-projects/commit/9554df79bf28c3d7ae4f3fe0e3a7e72440c9d68e) | 702 | Tau 3e-1 and batch size 256 | Not better than Trial 4 |
+| [Trial 8](https://github.com/mrbarbasa/drlnd-projects/commit/1207735e22043e92902eab83f8999e1d188183f6) | 564 | Tau 3e-1 and batch size 512 | Not better than Trial 4 |
+| [Trial 9](https://github.com/mrbarbasa/drlnd-projects/commit/7a1cd556e8eb8cf177d428594530f982bdc98edb) | 571 | Tau 3e-1 and batch size 1024 | Not better than Trial 4 |
+| [Trial 10](https://github.com/mrbarbasa/drlnd-projects/commit/67e4c9966a425fe81036e5e3473f12264513ff73) | Interrupted after 1000 | Tau 3e-1 and batch size 64 | Score did not reach 0.2 |
+| [Trial 11](https://github.com/mrbarbasa/drlnd-projects/commit/ad19117664bd5ba68aa2f5b84a798e25643fdbd6) | Interrupted after 1000 episodes | Tau 3e-1 and batch size 128; actor LR 1e-3 | Plateaued at score 0.0 after episode 100 |
+| [Trial 12](https://github.com/mrbarbasa/drlnd-projects/commit/d96609f00053f4215e0da01e66dfb6fcc0894461) | Interrupted after 1800 episodes | Tau 3e-1 and batch size 128; actor LR 1e-2 and critic LR 1e-2 | Plateaued at score 0.0 after episode 100 |
+| [Trial 13](https://github.com/mrbarbasa/drlnd-projects/commit/5b4e0a4b56c4c770e50e01e7d7d5ddaf141b5ae8) | 457 | Tau 3e-1 and batch size 128; critic LR 1e-4 | Best results thus far, better than Trial 4 |
+| [Trial 14](https://github.com/mrbarbasa/drlnd-projects/commit/125bb520797cbbbb272e45881ba3ae204e5c47ec) | Interrupted after 600 episodes | Tau 3e-1 and batch size 128; actor LR 5e-5 and critic LR 5e-5 | Not better than Trial 13 |
+| [Final Run](https://github.com/mrbarbasa/drlnd-projects/commit/b6b21ce121d54ded7e329af984374b3c580a4fcd) | 457 | Tau 3e-1 and batch size 128; critic LR 1e-4 | Verifying Trial 13 performs best |
 
 ## Plot of Rewards
 
