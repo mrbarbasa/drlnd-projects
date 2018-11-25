@@ -4,12 +4,6 @@
 
 # Project 3: Collaboration and Competition
 
-In this environment, a double-jointed arm can move to target locations.
-- **Reward:** +0.1 for each step that the agent's hand is in the goal location.
-- **Goal:** Agent should maintain its hand position at the target location for as many timesteps as possible.
-- **Observation Space:** 33 variables corresponding to position, rotation, velocity, and angular velocities of the arm.
-- **Action Space:** Each action is a vector with four numbers, corresponding to torque applicable to two joints. Every entry in the action vector should be a number between -1 and 1.
-
 ### Introduction
 
 For this project, we worked with the [Tennis](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md#tennis) environment. View the full report [here](https://github.com/mrbarbasa/drlnd-projects/blob/master/p3_collab-compet/Report.md).
