@@ -1,29 +1,44 @@
 [//]: # (Image References)
 
 [image1]: https://user-images.githubusercontent.com/10624937/42135623-e770e354-7d12-11e8-998d-29fc74429ca2.gif "Trained Agent"
-[image2]: https://user-images.githubusercontent.com/10624937/42135622-e55fb586-7d12-11e8-8a54-3c31da15a90a.gif "Soccer"
-
 
 # Project 3: Collaboration and Competition
 
 ### Introduction
 
-For this project, you will work with the [Tennis](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md#tennis) environment.
+For this project, we worked with the [Tennis](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md#tennis) environment. View the full report [here](https://github.com/mrbarbasa/drlnd-projects/blob/master/p3_collab-compet/Report.md).
 
 ![Trained Agent][image1]
 
-In this environment, two agents control rackets to bounce a ball over a net. If an agent hits the ball over the net, it receives a reward of +0.1.  If an agent lets a ball hit the ground or hits the ball out of bounds, it receives a reward of -0.01.  Thus, the goal of each agent is to keep the ball in play.
+In this environment, two agents control rackets to bounce a ball over a net.
+- **Positive Rewards:** +0.1 if an agent hits the ball over the net.
+- **Negative Rewards:** -0.01 if an agent lets a ball hit the ground or hits the ball out of bounds.
+- **Goal:** Each agent should keep the ball in play for as long as possible.
+- **Observation Space:** 8 variables corresponding to the position and velocity of the ball and racket. Each agent receives its own, local observation.
+- **Action Space:** Two continuous actions are available: 1) movement toward (or away from) the net, and 2) jumping. 
 
-The observation space consists of 8 variables corresponding to the position and velocity of the ball and racket. Each agent receives its own, local observation.  Two continuous actions are available, corresponding to movement toward (or away from) the net, and jumping. 
+#### Solving the Environment
 
-The task is episodic, and in order to solve the environment, your agents must get an average score of +0.5 (over 100 consecutive episodes, after taking the maximum over both agents). Specifically,
+An episode ends when the ball is out of play (when it's hit out of bounds or within bounds into the ground). Agents must get an average score of +0.5 over 100 consecutive episodes. This is done by summing up the rewards that each agent received per timestep, yielding two separate sums at the end of each episode; the maximum of these two scores is the score for the episode.
 
-- After each episode, we add up the rewards that each agent received (without discounting), to get a score for each agent. This yields 2 (potentially different) scores. We then take the maximum of these 2 scores.
-- This yields a single **score** for each episode.
-
-The environment is considered solved, when the average (over 100 episodes) of those **scores** is at least +0.5.
+The environment is considered solved when the average over 100 episodes of these scores is at least +0.5.
 
 ### Getting Started
+
+1. Download and install Anaconda or Miniconda: https://conda.io/docs/user-guide/install/download.html.
+1. In the terminal, create and activate a new environment with Python 3.6.
+    - __Linux__ or __Mac__: 
+    ```bash
+    conda create --name compete python=3.6
+    source activate compete
+    ```
+    - __Windows__: 
+    ```bash
+    conda create --name compete python=3.6 
+    activate compete
+    ```
+1. Navigate to the `python/` folder of this repository and install several dependencies by running `pip install .`.
+1. Run `python -m ipykernel install --user --name compete --display-name "compete"`.
 
 1. Download the environment from one of the links below.  You need only select the environment that matches your operating system:
     - Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Linux.zip)
@@ -35,28 +50,10 @@ The environment is considered solved, when the average (over 100 episodes) of th
 
     (_For AWS_) If you'd like to train the agent on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Linux_NoVis.zip) to obtain the "headless" version of the environment.  You will **not** be able to watch the agent without enabling a virtual screen, but you will be able to train the agent.  (_To watch the agent, you should follow the instructions to [enable a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md), and then download the environment for the **Linux** operating system above._)
 
-2. Place the file in the DRLND GitHub repository, in the `p3_collab-compet/` folder, and unzip (or decompress) the file. 
+1. Place the file in this repository's `p3_collab-compet/` folder, and unzip (or decompress) the file.
+1. In the terminal, run `jupyter notebook` and open the `Tennis.ipynb` file.
+1. Select `Kernel > Change kernel > compete` to change the kernel.
 
 ### Instructions
 
-Follow the instructions in `Tennis.ipynb` to get started with training your own agent!  
-
-### (Optional) Challenge: Crawler Environment
-
-After you have successfully completed the project, you might like to solve the more difficult **Soccer** environment.
-
-![Soccer][image2]
-
-In this environment, the goal is to train a team of agents to play soccer.  
-
-You can read more about this environment in the ML-Agents GitHub [here](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md#soccer-twos).  To solve this harder task, you'll need to download a new Unity environment.  (**Note**: Udacity students should not submit a project with this new environment.)
-
-You need only select the environment that matches your operating system:
-- Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Soccer/Soccer_Linux.zip)
-- Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Soccer/Soccer.app.zip)
-- Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Soccer/Soccer_Windows_x86.zip)
-- Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Soccer/Soccer_Windows_x86_64.zip)
-
-Then, place the file in the `p3_collab-compet/` folder in the DRLND GitHub repository, and unzip (or decompress) the file.  Next, open `Soccer.ipynb` and follow the instructions to learn how to use the Python API to control the agent.
-
-(_For AWS_) If you'd like to train the agents on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Soccer/Soccer_Linux_NoVis.zip) to obtain the "headless" version of the environment.  You will **not** be able to watch the agents without enabling a virtual screen, but you will be able to train the agents.  (_To watch the agents, you should follow the instructions to [enable a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md), and then download the environment for the **Linux** operating system above._)
+Run or view the output of each cell in `Tennis.ipynb`. You would have to modify the file `ddpg_agent.py` to get similar results (based on the comments for each trial in part 4 of the notebook). I have left `model.py` and `ddpg_agent.py` to their optimal settings after all the trials I've run.
